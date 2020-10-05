@@ -1,9 +1,9 @@
-import 'package:codenames/model/code_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/game/game_bloc.dart';
 import '../bloc/game/game_state.dart';
+import '../model/code_card.dart';
 
 class PlayScreen extends StatelessWidget {
   @override
@@ -38,25 +38,42 @@ class PlayScreen extends StatelessWidget {
 
   Widget _buildPlaying(BuildContext context, GameStatePlaying state) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
           children: [
-            Card(
-                child: InkWell(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: Text("Back"))),
+            Expanded(
+              child: Card(
+                  child: InkWell(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Text("Back"))),
+            ),
+            Spacer(flex: 3),
+            Expanded(
+              child: Card(
+                  child: InkWell(
+                      onTap: () => Navigator.of(context).pushNamed('/export'),
+                      child: Text("View Code"))),
+            ),
           ],
         ),
-        Row(children: state.cards.take(5).map(_cardBuilder).toList()),
-        Row(children: state.cards.skip(5).take(5).map(_cardBuilder).toList()),
-        Row(children: state.cards.skip(10).take(5).map(_cardBuilder).toList()),
-        Row(children: state.cards.skip(15).take(5).map(_cardBuilder).toList()),
-        Row(children: state.cards.skip(20).take(5).map(_cardBuilder).toList()),
+        GridView.count(
+          crossAxisCount: 5,
+          padding: const EdgeInsets.all(1.5),
+          mainAxisSpacing: 1.0,
+          crossAxisSpacing: 1.0,
+          shrinkWrap: true,
+          children:
+              state.cards.map((card) => _cardBuilder(context, card)).toList(),
+        )
       ],
     );
   }
 
-  Widget _cardBuilder(CodeCard card) {}
+  Widget _cardBuilder(BuildContext context, CodeCard card) {
+    return Card(
+        child: InkWell(
+            onTap: () => Navigator.of(context).pop(), child: Text(card.word)));
+  }
 }

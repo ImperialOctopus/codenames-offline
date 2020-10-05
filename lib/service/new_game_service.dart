@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import '../model/code_card.dart';
 import '../model/card_affiliation.dart';
+import '../model/code_card.dart';
 import 'word_service.dart';
 
 enum StartingTeam {
