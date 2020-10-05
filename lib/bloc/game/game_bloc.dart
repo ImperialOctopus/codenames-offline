@@ -12,7 +12,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
 
   GameBloc({@required NewGameService newGameService})
       : _newGameService = newGameService,
-        super(const GameState.unknown());
+        super(GameStateEmpty());
 
   @override
   Stream<GameState> mapEventToState(
@@ -29,18 +29,22 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     GameEventNew event,
   ) async* {
     var cardList = await _newGameService.generateCardList();
-    yield GameState.playing(cardList);
+    yield GameStatePlaying(cardList);
   }
 
   Stream<GameState> _mapGameEventFlipToState(
     GameEventFlip event,
   ) async* {
-    var cardList = state.cards;
-    var flipIndex = event.flipIndex;
+    if (state is GameStatePlaying) {
+      var cardList = (state as GameStatePlaying).cards;
+      var flipIndex = event.flipIndex;
 
-    cardList[flipIndex] = cardList[flipIndex].copyWith(visible: true);
+      cardList[flipIndex] = cardList[flipIndex].copyWith(visible: true);
 
-    yield GameState.playing(cardList);
+      yield GameStatePlaying(cardList);
+    } else {
+      throw StateError('Tried to flip card with and empty game state');
+    }
   }
 
   @override

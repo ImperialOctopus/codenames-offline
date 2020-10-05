@@ -1,17 +1,20 @@
 import 'package:equatable/equatable.dart';
 
-import '../../model/card.dart';
+import '../../model/code_card.dart';
 
-class GameState extends Equatable {
-  final List<Card> cards;
+abstract class GameState extends Equatable {
+  const GameState();
 
-  const GameState._({
-    this.cards,
-  });
+  @override
+  List<Object> get props => [];
+}
 
-  const GameState.unknown() : this._();
+class GameStateEmpty extends GameState {}
 
-  const GameState.playing(List<Card> cards) : this._(cards: cards);
+class GameStatePlaying extends GameState {
+  final List<CodeCard> cards;
+
+  const GameStatePlaying(this.cards);
 
   @override
   List<Object> get props => [cards];

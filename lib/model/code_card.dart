@@ -2,18 +2,18 @@ import 'package:meta/meta.dart';
 
 import 'card_affiliation.dart';
 
-class Card {
+class CodeCard {
   final CardAffiliation affiliation;
   final bool visible;
   final String word;
 
-  const Card(
+  const CodeCard(
       {@required this.word,
       @required this.affiliation,
       @required this.visible});
 
-  Card copyWith({CardAffiliation affiliation, bool visible, String word}) =>
-      Card(
+  CodeCard copyWith({CardAffiliation affiliation, bool visible, String word}) =>
+      CodeCard(
           affiliation: affiliation ?? this.affiliation,
           visible: visible ?? this.visible,
           word: word ?? this.word);

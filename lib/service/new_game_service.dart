@@ -1,8 +1,7 @@
 import 'dart:math';
 
-import 'package:codenames/model/card_affiliation.dart';
-
-import '../model/card.dart';
+import '../model/code_card.dart';
+import '../model/card_affiliation.dart';
 import 'word_service.dart';
 
 enum StartingTeam {
@@ -21,7 +20,7 @@ class NewGameService {
 
   NewGameService(this.wordService);
 
-  Future<List<Card>> generateCardList(
+  Future<List<CodeCard>> generateCardList(
       [StartingTeam startingTeam = StartingTeam.random]) async {
     if (startingTeam == StartingTeam.random) {
       startingTeam =
@@ -31,12 +30,12 @@ class NewGameService {
     return wordService
         .randomWordList(totalCards)
         .asMap()
-        .map<int, Card>((var i, var word) {
+        .map<int, CodeCard>((var i, var word) {
           if (i < startingTeamCards) {
             // Starting team
-            return MapEntry<int, Card>(
+            return MapEntry<int, CodeCard>(
                 i,
-                Card(
+                CodeCard(
                     word: word,
                     affiliation: (startingTeam == StartingTeam.red)
                         ? CardAffiliation.red
@@ -44,9 +43,9 @@ class NewGameService {
                     visible: false));
           } else if (i < startingTeamCards + secondTeamCards) {
             // Second team
-            return MapEntry<int, Card>(
+            return MapEntry<int, CodeCard>(
                 i,
-                Card(
+                CodeCard(
                     word: word,
                     affiliation: (startingTeam == StartingTeam.red)
                         ? CardAffiliation.blue
@@ -54,17 +53,17 @@ class NewGameService {
                     visible: false));
           } else if (i < startingTeamCards + secondTeamCards + assassinCards) {
             // Assassin card
-            return MapEntry<int, Card>(
+            return MapEntry<int, CodeCard>(
                 i,
-                Card(
+                CodeCard(
                     word: word,
                     affiliation: CardAffiliation.assassin,
                     visible: false));
           } else {
             // Bystander
-            return MapEntry<int, Card>(
+            return MapEntry<int, CodeCard>(
                 i,
-                Card(
+                CodeCard(
                     word: word,
                     affiliation: CardAffiliation.neutral,
                     visible: false));
