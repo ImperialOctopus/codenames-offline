@@ -9,7 +9,6 @@ class PlayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: BlocBuilder<GameBloc, GameState>(
           bloc: BlocProvider.of<GameBloc>(context),
           builder: (var context, state) {
@@ -37,43 +36,202 @@ class PlayScreen extends StatelessWidget {
   }
 
   Widget _buildPlaying(BuildContext context, GameStatePlaying state) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: Card(
-                  child: InkWell(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Text("Back"))),
-            ),
-            Spacer(flex: 3),
-            Expanded(
-              child: Card(
-                  child: InkWell(
-                      onTap: () => Navigator.of(context).pushNamed('/export'),
-                      child: Text("View Code"))),
-            ),
-          ],
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                height: 80,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(child: _buildBackButton(context)),
+                    Expanded(flex: 3, child: _buildScoreBar(context)),
+                    Expanded(child: _buildCodeButton(context)),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: state.cards
+                      .take(5)
+                      .map((card) => _cardBuilder(context, card))
+                      .toList(),
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: state.cards
+                      .skip(5)
+                      .take(5)
+                      .map((card) => _cardBuilder(context, card))
+                      .toList(),
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: state.cards
+                      .skip(10)
+                      .take(5)
+                      .map((card) => _cardBuilder(context, card))
+                      .toList(),
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: state.cards
+                      .skip(15)
+                      .take(5)
+                      .map((card) => _cardBuilder(context, card))
+                      .toList(),
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: state.cards
+                      .skip(20)
+                      .take(5)
+                      .map((card) => _cardBuilder(context, card))
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
         ),
-        GridView.count(
-          crossAxisCount: 5,
-          padding: const EdgeInsets.all(1.5),
-          mainAxisSpacing: 1.0,
-          crossAxisSpacing: 1.0,
-          shrinkWrap: true,
-          children:
-              state.cards.map((card) => _cardBuilder(context, card)).toList(),
-        )
-      ],
+      ),
     );
   }
 
   Widget _cardBuilder(BuildContext context, CodeCard card) {
-    return Card(
+    return Expanded(
+      child: Card(
+        color: Color.fromARGB(255, 245, 230, 200),
         child: InkWell(
-            onTap: () => Navigator.of(context).pop(), child: Text(card.word)));
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          card.word.toLowerCase(),
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: RotatedBox(
+                        quarterTurns: 2,
+                        child: Text(
+                          card.word.toLowerCase(),
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
+                    ),
+                  ],
+                ))),
+      ),
+    );
+  }
+
+  Widget _buildBackButton(BuildContext context) {
+    return Card(
+      color: Color.fromARGB(255, 240, 30, 30),
+      child: InkWell(
+        onTap: () => Navigator.of(context).pop(),
+        child: Center(
+          child: Text(
+            'back',
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildScoreBar(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+            child: Card(
+          color: Color.fromARGB(255, 240, 30, 30),
+          child: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+            child: Center(
+              child: Text(
+                'back',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ),
+        )),
+        Expanded(
+            child: Card(
+          color: Color.fromARGB(255, 240, 30, 30),
+          child: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+            child: Center(
+              child: Text(
+                'back',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ),
+        )),
+        Expanded(
+            child: Card(
+          color: Color.fromARGB(255, 240, 30, 30),
+          child: InkWell(
+            onTap: () => Navigator.of(context).pop(),
+            child: Center(
+              child: Text(
+                'back',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ),
+        )),
+      ],
+    );
+  }
+
+  Widget _buildCodeButton(BuildContext context) {
+    return Card(
+      color: Color.fromARGB(255, 245, 230, 200),
+      child: InkWell(
+        onTap: () => Navigator.of(context).pushNamed('/export'),
+        child: Center(
+          child: Text(
+            'view code',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        ),
+      ),
+    );
   }
 }
