@@ -38,7 +38,7 @@ class SpymasterScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('No game data found'),
-        RaisedButton(
+        OutlinedButton(
             child: Text('Back'), onPressed: () => Navigator.of(context).pop()),
       ],
     ));

@@ -36,13 +36,13 @@ class ImportScreen extends StatelessWidget {
                 bloc: BlocProvider.of<CodeImportBloc>(context),
                 builder: (var context, state) {
                   if (state is CodeImportStateValid) {
-                    return RaisedButton(
+                    return OutlinedButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/spymaster'),
                       child: Text('view board'),
                     );
                   } else {
-                    return RaisedButton(
+                    return OutlinedButton(
                       onPressed: null,
                       child: Text('code invalid'),
                     );
