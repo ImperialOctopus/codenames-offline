@@ -18,7 +18,7 @@ class ImportScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline3),
             Container(height: 20),
             Container(
-              width: 200,
+              width: 250,
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
