@@ -29,7 +29,10 @@ class ExportScreen extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('No game data found'),
+        Text(
+          'no game data found',
+          style: Theme.of(context).textTheme.headline4,
+        ),
         RaisedButton(
             child: Text('Back'), onPressed: () => Navigator.of(context).pop()),
       ],
@@ -41,9 +44,12 @@ class ExportScreen extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('rabbit'),
-        Text(RepositoryProvider.of<SecretCodeService>(context)
-            .encode(state.cards.map((card) => card.affiliation).toList())),
+        Text('spymaster code', style: Theme.of(context).textTheme.headline4),
+        SelectableText(
+          RepositoryProvider.of<SecretCodeService>(context)
+              .encode(state.cards.map((card) => card.affiliation).toList()),
+          style: Theme.of(context).textTheme.headline2,
+        ),
       ],
     ));
   }

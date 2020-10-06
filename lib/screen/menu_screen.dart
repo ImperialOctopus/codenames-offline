@@ -13,8 +13,8 @@ class MenuScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Codenames',
-              style: Theme.of(context).textTheme.headline3,
+              'codenames',
+              style: Theme.of(context).textTheme.headline2,
             ),
             RaisedButton(
                 child: Text('New'),
