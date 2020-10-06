@@ -1,3 +1,4 @@
+import 'package:codenames/bloc/code_import/code_import_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,10 +32,19 @@ class CodenamesApp extends StatelessWidget {
           value: secretCodeService,
         ),
       ],
-      child: BlocProvider<GameBloc>(
-        create: (_) => GameBloc(
-          newGameService: newGameService,
-        ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<GameBloc>(
+            create: (_) => GameBloc(
+              newGameService: newGameService,
+            ),
+          ),
+          BlocProvider<CodeImportBloc>(
+            create: (_) => CodeImportBloc(
+              secretCodeService: secretCodeService,
+            ),
+          ),
+        ],
         child: AppView(),
       ),
     );

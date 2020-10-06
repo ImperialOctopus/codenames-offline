@@ -22,7 +22,9 @@ class MenuScreen extends StatelessWidget {
                   BlocProvider.of<GameBloc>(context).add(GameEventNew());
                   Navigator.of(context).pushNamed('/play');
                 }),
-            RaisedButton(child: Text('New'), onPressed: null),
+            RaisedButton(
+                child: Text('Import'),
+                onPressed: () => Navigator.of(context).pushNamed('/import')),
           ],
         ),
       ),

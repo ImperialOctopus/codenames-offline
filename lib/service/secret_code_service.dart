@@ -12,16 +12,20 @@ class SecretCodeService {
   }
 
   List<CardAffiliation> decode(String string) {
-    final fourString =
-        (baseconvert.base(string, inBase: 36, outBase: 4) as List<dynamic>)
-            .map((dynamic e) => e.toString())
-            .toList();
-    final b = fourString.map((i) => int.parse(i.toString())).toList();
-    final result = b.map((val) => CardAffiliation.values[val]).toList();
-    while (result.length < 25) {
-      result.insert(0, CardAffiliation.neutral);
+    try {
+      final fourString =
+          (baseconvert.base(string, inBase: 36, outBase: 4) as List<dynamic>)
+              .map((dynamic e) => e.toString())
+              .toList();
+      final b = fourString.map((i) => int.parse(i.toString())).toList();
+      final result = b.map((val) => CardAffiliation.values[val]).toList();
+      while (result.length < 25) {
+        result.insert(0, CardAffiliation.neutral);
+      }
+      return result;
+    } on Exception {
+      return [];
     }
-    return result;
   }
 
   bool validateAffiliationList(List<CardAffiliation> list) {
