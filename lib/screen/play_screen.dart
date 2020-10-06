@@ -6,6 +6,9 @@ import '../bloc/game/game_state.dart';
 import '../model/code_card.dart';
 
 class PlayScreen extends StatelessWidget {
+  static const cardColor = Color.fromARGB(255, 245, 230, 200);
+  static const backButtonColor = Color.fromARGB(255, 240, 30, 30);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +117,7 @@ class PlayScreen extends StatelessWidget {
   Widget _cardBuilder(BuildContext context, CodeCard card) {
     return Expanded(
       child: Card(
-        color: Color.fromARGB(255, 245, 230, 200),
+        color: cardColor,
         child: InkWell(
             onTap: () => Navigator.of(context).pop(),
             child: Padding(
@@ -148,7 +151,7 @@ class PlayScreen extends StatelessWidget {
 
   Widget _buildBackButton(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 240, 30, 30),
+      color: backButtonColor,
       child: InkWell(
         onTap: () => Navigator.of(context).pop(),
         child: Center(
@@ -168,50 +171,16 @@ class PlayScreen extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Spacer(flex: 2),
         Expanded(
             child: Card(
-          color: Color.fromARGB(255, 240, 30, 30),
+          color: cardColor,
           child: InkWell(
             onTap: () => Navigator.of(context).pop(),
             child: Center(
               child: Text(
                 'back',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(color: Colors.white),
-              ),
-            ),
-          ),
-        )),
-        Expanded(
-            child: Card(
-          color: Color.fromARGB(255, 240, 30, 30),
-          child: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: Center(
-              child: Text(
-                'back',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(color: Colors.white),
-              ),
-            ),
-          ),
-        )),
-        Expanded(
-            child: Card(
-          color: Color.fromARGB(255, 240, 30, 30),
-          child: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: Center(
-              child: Text(
-                'back',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headline4,
               ),
             ),
           ),
@@ -222,7 +191,7 @@ class PlayScreen extends StatelessWidget {
 
   Widget _buildCodeButton(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 245, 230, 200),
+      color: cardColor,
       child: InkWell(
         onTap: () => Navigator.of(context).pushNamed('/export'),
         child: Center(
