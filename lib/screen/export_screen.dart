@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/game/game_bloc.dart';
 import '../bloc/game/game_state.dart';
+import '../service/secret_code_service.dart';
 
 class ExportScreen extends StatelessWidget {
   @override
@@ -41,6 +42,8 @@ class ExportScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('rabbit'),
+        Text(RepositoryProvider.of<SecretCodeService>(context)
+            .encode(state.cards.map((card) => card.affiliation).toList())),
       ],
     ));
   }

@@ -10,12 +10,12 @@ enum StartingTeam {
   random,
 }
 
-const int totalCards = 25;
-const int startingTeamCards = 9;
-const int secondTeamCards = 8;
-const int assassinCards = 1;
-
 class NewGameService {
+  static const int totalCards = 25;
+  static const int startingTeamCards = 9;
+  static const int secondTeamCards = 8;
+  static const int assassinCards = 1;
+
   final WordService wordService;
 
   NewGameService(this.wordService);

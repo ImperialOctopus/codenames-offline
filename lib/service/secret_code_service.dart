@@ -1,14 +1,52 @@
-import 'dart:math';
+import 'package:baseconvert/baseconvert.dart' as baseconvert;
+import 'package:codenames/service/new_game_service.dart';
+
+import '../model/card_affiliation.dart';
 
 class SecretCodeService {
-  String encode(List<bool> bits) {
-    bits
-        .asMap()
-        .map<int, int>(
-            (k, v) => MapEntry(k, v ? pow(2, bits.length - k - 1).toInt() : 0))
-        .values
-        .reduce((a, b) => a + b);
+  String encode(List<CardAffiliation> list) {
+    final string = list.map((aff) => aff.index).join();
+    return baseconvert
+        .base(string, inBase: 4, outBase: 36, string: true)
+        .toString();
   }
 
-  List<bool> decode(String string) {}
+  List<CardAffiliation> decode(String string) {
+    final fourString =
+        (baseconvert.base(string, inBase: 36, outBase: 4) as List<dynamic>)
+            .map((dynamic e) => e.toString())
+            .toList();
+    final b = fourString.map((i) => int.parse(i.toString())).toList();
+    final result = b.map((val) => CardAffiliation.values[val]).toList();
+    while (result.length < 25) {
+      result.insert(0, CardAffiliation.neutral);
+    }
+    return result;
+  }
+
+  bool validateAffiliationList(List<CardAffiliation> list) {
+    final redCards =
+        list.where((element) => element == CardAffiliation.red).length;
+    final blueCards =
+        list.where((element) => element == CardAffiliation.blue).length;
+    final assassins =
+        list.where((element) => element == CardAffiliation.assassin).length;
+
+    if (list.length != NewGameService.totalCards) {
+      return false;
+    }
+    if (assassins != NewGameService.assassinCards) {
+      return false;
+    }
+
+    if (redCards == NewGameService.startingTeamCards &&
+        blueCards == NewGameService.secondTeamCards) {
+      return true;
+    } else if (blueCards == NewGameService.startingTeamCards &&
+        redCards == NewGameService.secondTeamCards) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

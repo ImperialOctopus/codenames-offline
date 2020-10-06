@@ -1,4 +1,3 @@
-import 'package:codenames/service/secret_code_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +7,7 @@ import 'screen/import_screen.dart';
 import 'screen/menu_screen.dart';
 import 'screen/play_screen.dart';
 import 'service/new_game_service.dart';
+import 'service/secret_code_service.dart';
 import 'theme/theme.dart';
 
 class CodenamesApp extends StatelessWidget {
