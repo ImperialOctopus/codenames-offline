@@ -1,3 +1,4 @@
+import 'package:codenames/bloc/game/game_event.dart';
 import 'package:codenames/model/card_affiliation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,7 +65,7 @@ class PlayScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: state.cards
                       .take(5)
-                      .map((card) => _cardBuilder(context, card))
+                      .map((card) => _cardBuilder(context, state, card))
                       .toList(),
                 ),
               ),
@@ -74,7 +75,7 @@ class PlayScreen extends StatelessWidget {
                   children: state.cards
                       .skip(5)
                       .take(5)
-                      .map((card) => _cardBuilder(context, card))
+                      .map((card) => _cardBuilder(context, state, card))
                       .toList(),
                 ),
               ),
@@ -84,7 +85,7 @@ class PlayScreen extends StatelessWidget {
                   children: state.cards
                       .skip(10)
                       .take(5)
-                      .map((card) => _cardBuilder(context, card))
+                      .map((card) => _cardBuilder(context, state, card))
                       .toList(),
                 ),
               ),
@@ -94,7 +95,7 @@ class PlayScreen extends StatelessWidget {
                   children: state.cards
                       .skip(15)
                       .take(5)
-                      .map((card) => _cardBuilder(context, card))
+                      .map((card) => _cardBuilder(context, state, card))
                       .toList(),
                 ),
               ),
@@ -104,7 +105,7 @@ class PlayScreen extends StatelessWidget {
                   children: state.cards
                       .skip(20)
                       .take(5)
-                      .map((card) => _cardBuilder(context, card))
+                      .map((card) => _cardBuilder(context, state, card))
                       .toList(),
                 ),
               ),
@@ -115,39 +116,58 @@ class PlayScreen extends StatelessWidget {
     );
   }
 
-  Widget _cardBuilder(BuildContext context, CodeCard card) {
-    return Expanded(
-      child: Card(
-        color: cardColor,
-        child: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          card.word.toLowerCase(),
-                          style: Theme.of(context).textTheme.headline4,
+  Widget _cardBuilder(
+      BuildContext context, GameStatePlaying state, CodeCard card) {
+    if (card.visible) {
+      return Expanded(
+        child: Card(
+          color: cardColor,
+          child: InkWell(
+            onTap: () {
+              BlocProvider.of<GameBloc>(context)
+                  .add(GameEventFlip(state.cards.indexOf(card)));
+            },
+            child: Text(card.affiliation.toString()),
+          ),
+        ),
+      );
+    } else {
+      return Expanded(
+        child: Card(
+          color: cardColor,
+          child: InkWell(
+              onTap: () {
+                BlocProvider.of<GameBloc>(context)
+                    .add(GameEventFlip(state.cards.indexOf(card)));
+              },
+              child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            card.word.toLowerCase(),
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: RotatedBox(
-                        quarterTurns: 2,
-                        child: Text(
-                          card.word.toLowerCase(),
-                          style: Theme.of(context).textTheme.headline5,
+                      Expanded(
+                        child: RotatedBox(
+                          quarterTurns: 2,
+                          child: Text(
+                            card.word.toLowerCase(),
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ))),
-      ),
-    );
+                    ],
+                  ))),
+        ),
+      );
+    }
   }
 
   Widget _buildBackButton(BuildContext context) {

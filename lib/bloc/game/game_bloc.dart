@@ -36,14 +36,15 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     GameEventFlip event,
   ) async* {
     if (state is GameStatePlaying) {
-      var cardList = (state as GameStatePlaying).cards;
+      var cardList = (state as GameStatePlaying).cards.toList();
       var flipIndex = event.flipIndex;
 
-      cardList[flipIndex] = cardList[flipIndex].copyWith(visible: true);
+      cardList[flipIndex] =
+          cardList[flipIndex].copyWith(visible: !cardList[flipIndex].visible);
 
       yield GameStatePlaying(cardList);
     } else {
-      throw StateError('Tried to flip card with and empty game state');
+      throw StateError('Tried to flip card with an empty game state');
     }
   }
 
