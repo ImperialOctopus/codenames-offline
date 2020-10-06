@@ -1,16 +1,5 @@
 /// URLs for offline cache.
 final List<String> offlineUrls = [
-  './4c2bfcc41fcc9beb37f6c33d83865ddf/gen_localizations.stamp',
-  './cache.dill.track.dill',
-  './f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill',
-  './flutter_assets/AssetManifest.json',
-  './flutter_assets/FontManifest.json',
-  './flutter_assets/NOTICES',
-  './flutter_assets/fonts/MaterialIcons-Regular.otf',
-  './flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf',
-  './flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf',
-  './flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf',
-  './flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf',
   './web/',
   './web/.last_build_id',
   './web/assets/AssetManifest.json',
@@ -23,12 +12,20 @@ final List<String> offlineUrls = [
   './web/assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf',
   './web/favicon.png',
   './web/flutter_service_worker.js',
-  './web/icons/Icon-512.png',
+  './web/icon/128.png',
+  './web/icon/144.png',
+  './web/icon/152.png',
+  './web/icon/192.png',
+  './web/icon/384.png',
+  './web/icon/512.png',
+  './web/icon/72.png',
+  './web/icon/96.png',
   './web/main.dart.js',
   './web/main.dart.js.map',
   './web/manifest.json',
   './web/pwa.dart',
+  './web/version.json',
 ];
 
 /// Last modified timestamp of the files
-final String lastModified = '2020-10-06T18:23:25.000Z';
+final String lastModified = '2020-10-06T19:57:38.000Z';
