@@ -1,7 +1,7 @@
-import 'package:codenames/bloc/code_import/code_import_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/code_import/code_import_bloc.dart';
 import 'bloc/game/game_bloc.dart';
 import 'screen/export_screen.dart';
 import 'screen/import_screen.dart';

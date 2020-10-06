@@ -1,7 +1,7 @@
 import 'package:baseconvert/baseconvert.dart' as baseconvert;
-import 'package:codenames/service/new_game_service.dart';
 
 import '../model/card_affiliation.dart';
+import 'new_game_service.dart';
 
 class SecretCodeService {
   String encode(List<CardAffiliation> list) {

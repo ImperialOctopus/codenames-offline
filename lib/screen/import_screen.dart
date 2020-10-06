@@ -1,8 +1,9 @@
-import 'package:codenames/bloc/code_import/code_import_bloc.dart';
-import 'package:codenames/bloc/code_import/code_import_event.dart';
-import 'package:codenames/bloc/code_import/code_import_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/code_import/code_import_bloc.dart';
+import '../bloc/code_import/code_import_event.dart';
+import '../bloc/code_import/code_import_state.dart';
 
 class ImportScreen extends StatelessWidget {
   @override
