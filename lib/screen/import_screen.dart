@@ -12,15 +12,26 @@ class ImportScreen extends StatelessWidget {
       appBar: AppBar(),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Import Screen'),
-            TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Enter spymaster code...'),
-              onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
-                  .add(CodeImportEventChanged(string.toUpperCase().trim())),
+            Text('spymaster code',
+                style: Theme.of(context).textTheme.headline3),
+            Container(height: 20),
+            Container(
+              width: 200,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(),
+                  ),
+                ),
+                style: Theme.of(context).textTheme.headline4,
+                onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
+                    .add(CodeImportEventChanged(string.toUpperCase().trim())),
+              ),
             ),
+            Container(height: 20),
             BlocBuilder<CodeImportBloc, CodeImportState>(
                 bloc: BlocProvider.of<CodeImportBloc>(context),
                 builder: (var context, state) {
@@ -28,12 +39,12 @@ class ImportScreen extends StatelessWidget {
                     return RaisedButton(
                       onPressed: () =>
                           Navigator.of(context).pushNamed('/spymaster'),
-                      child: Text('View Board'),
+                      child: Text('view board'),
                     );
                   } else {
                     return RaisedButton(
                       onPressed: null,
-                      child: Text('Invalid Code'),
+                      child: Text('code invalid'),
                     );
                   }
                 }),

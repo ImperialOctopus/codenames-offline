@@ -17,13 +17,13 @@ class MenuScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headline2,
             ),
             RaisedButton(
-                child: Text('New'),
+                child: Text('new game'),
                 onPressed: () {
                   BlocProvider.of<GameBloc>(context).add(GameEventNew());
                   Navigator.of(context).pushNamed('/play');
                 }),
             RaisedButton(
-                child: Text('Import'),
+                child: Text('spymaster'),
                 onPressed: () => Navigator.of(context).pushNamed('/import')),
           ],
         ),
