@@ -1,33 +1,11 @@
-class WordService {
-  String get randomWord => 'banana';
+import 'dart:math';
 
-  List<String> randomWordList(int length) {
-    return [
-      'lacking',
-      'creator',
-      'guiltless',
-      'consist',
-      'linen',
-      'wrist',
-      'wish',
-      'interrupt',
-      'long-term',
-      'brake',
-      'surround',
-      'blot',
-      'powder',
-      'fog',
-      'nippy',
-      'modern',
-      'digestion',
-      'popcorn',
-      'tax',
-      'overt',
-      'control',
-      'spell',
-      'accurate',
-      'argument',
-      'bite'
-    ];
-  }
+import '../data/wordlist.dart' as wordlist_data;
+
+class WordService {
+  String randomWord() =>
+      wordlist_data.wordlist[Random().nextInt(wordlist_data.wordlist.length)];
+
+  List<String> randomWordList(int length) =>
+      (wordlist_data.wordlist.toList()..shuffle()).take(length).toList();
 }
