@@ -225,38 +225,67 @@ class PlayScreen extends StatelessWidget {
         child: Card(
           color: cardColor,
           child: InkWell(
-              onTap: () {
-                BlocProvider.of<GameBloc>(context)
-                    .add(GameEventFlip(state.cards.indexOf(card)));
+            onTap: () {
+              BlocProvider.of<GameBloc>(context)
+                  .add(GameEventFlip(state.cards.indexOf(card)));
+            },
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 200) {
+                  return _buildDoubleCard(context, card);
+                } else {
+                  return _buildSingleCard(context, card);
+                }
               },
-              child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            card.word.toLowerCase(),
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: RotatedBox(
-                          quarterTurns: 2,
-                          child: Text(
-                            card.word.toLowerCase(),
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ))),
+            ),
+          ),
         ),
       );
     }
+  }
+
+  Widget _buildDoubleCard(BuildContext context, CodeCard card) {
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.topLeft,
+                child: Text(
+                  card.word.toLowerCase(),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+            ),
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.bottomRight,
+                child: RotatedBox(
+                  quarterTurns: 2,
+                  child: Text(
+                    card.word.toLowerCase(),
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ));
+  }
+
+  Widget _buildSingleCard(BuildContext context, CodeCard card) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      alignment: Alignment.center,
+      child: Text(
+        card.word.toLowerCase(),
+        style: Theme.of(context).textTheme.headline4,
+      ),
+    );
   }
 
   Widget _buildBackButton(BuildContext context) {
@@ -265,12 +294,15 @@ class PlayScreen extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context).pop(),
         child: Center(
-          child: Text(
-            'back',
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Colors.white),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'back',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4
+                  .copyWith(color: Colors.white),
+            ),
           ),
         ),
       ),
@@ -286,9 +318,12 @@ class PlayScreen extends StatelessWidget {
             child: Card(
           color: cardColor,
           child: Center(
-            child: Text(
-              'red: ${state.redCardsLeft}',
-              style: Theme.of(context).textTheme.headline4,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                'red: ${state.redCardsLeft}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ),
         )),
@@ -296,9 +331,12 @@ class PlayScreen extends StatelessWidget {
             child: Card(
           color: cardColor,
           child: Center(
-            child: Text(
-              'blue: ${state.blueCardsLeft}',
-              style: Theme.of(context).textTheme.headline4,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                'blue: ${state.blueCardsLeft}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
           ),
         )),
@@ -312,9 +350,12 @@ class PlayScreen extends StatelessWidget {
       child: InkWell(
         onTap: () => Navigator.of(context).pushNamed('/export'),
         child: Center(
-          child: Text(
-            'view code',
-            style: Theme.of(context).textTheme.headline4,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'view code',
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ),
         ),
       ),
