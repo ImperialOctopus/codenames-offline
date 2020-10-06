@@ -1,11 +1,14 @@
 /// URLs for offline cache.
 final List<String> offlineUrls = [
+  './.last_build_id',
+  './cache.dill.track.dill',
   './e718c584ce5f0c71ff76227d45ee3982/gen_localizations.stamp',
   './f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill',
   './flutter_assets/AssetManifest.json',
   './flutter_assets/FontManifest.json',
   './flutter_assets/NOTICES',
   './flutter_assets/fonts/MaterialIcons-Regular.otf',
+  './flutter_assets/kernel_blob.bin',
   './flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf',
   './flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf',
   './flutter_assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf',
@@ -38,4 +41,4 @@ final List<String> offlineUrls = [
 ];
 
 /// Last modified timestamp of the files
-final String lastModified = '2020-10-06T21:28:55.000Z';
+final String lastModified = '2020-10-06T21:57:39.000Z';
