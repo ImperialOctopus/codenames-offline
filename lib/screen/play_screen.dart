@@ -246,16 +246,14 @@ class PlayScreen extends StatelessWidget {
 
   Widget _buildDoubleCard(BuildContext context, CodeCard card) {
     return FractionallySizedBox(
-        widthFactor: 0.8,
         heightFactor: 0.8,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Center(
+            Align(
+              alignment: Alignment.topCenter,
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.center,
                 child: RotatedBox(
                   quarterTurns: 2,
                   child: Text(
@@ -265,16 +263,25 @@ class PlayScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                  color: Colors.white),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.center,
-                child: Text(
-                  card.word.toLowerCase(),
-                  style: Theme.of(context).textTheme.headline4,
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                widthFactor: 0.8,
+                child: LimitedBox(
+                  maxHeight: 100,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Colors.white),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.center,
+                      child: Text(
+                        card.word.toLowerCase(),
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -289,16 +296,19 @@ class PlayScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.white),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.center,
-              child: Text(
-                card.word.toLowerCase(),
-                style: Theme.of(context).textTheme.headline4,
+          LimitedBox(
+            maxHeight: 100,
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                  color: Colors.white),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.center,
+                child: Text(
+                  card.word.toLowerCase(),
+                  style: Theme.of(context).textTheme.headline3,
+                ),
               ),
             ),
           ),
