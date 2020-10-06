@@ -9,6 +9,7 @@ class ImportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Column(
           children: [
@@ -18,7 +19,7 @@ class ImportScreen extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: 'Enter spymaster code...'),
               onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
-                  .add(CodeImportEventChanged(string)),
+                  .add(CodeImportEventChanged(string.toUpperCase().trim())),
             ),
             BlocBuilder<CodeImportBloc, CodeImportState>(
                 bloc: BlocProvider.of<CodeImportBloc>(context),
