@@ -63,6 +63,7 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Codenames Offline',
       theme: themeData,
       navigatorKey: _navigatorKey,
       home: MenuScreen(),
