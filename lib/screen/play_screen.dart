@@ -11,11 +11,12 @@ import '../model/code_card.dart';
 
 class PlayScreen extends StatelessWidget {
   static const cardColor = Color.fromARGB(255, 245, 230, 200);
+  static const neutralColor = cardColor;
   static const redColor = Colors.red;
   static const blueColor = Colors.blue;
   static const assassinColor = Colors.black;
   static const iconColor = Color.fromARGB(100, 0, 0, 0);
-  static const backButtonColor = Color.fromARGB(255, 240, 30, 30);
+  static const backButtonColor = Color.fromARGB(255, 181, 51, 70);
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +137,7 @@ class PlayScreen extends StatelessWidget {
         case CardAffiliation.neutral:
           return Expanded(
             child: Card(
-              color: cardColor,
+              color: neutralColor,
               child: InkWell(
                 onTap: () {
                   BlocProvider.of<GameBloc>(context)
