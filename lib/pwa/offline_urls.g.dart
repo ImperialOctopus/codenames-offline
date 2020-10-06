@@ -23,12 +23,12 @@ final List<String> offlineUrls = [
   './web/assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf',
   './web/favicon.png',
   './web/flutter_service_worker.js',
-  './web/icons/Icon-192.png',
   './web/icons/Icon-512.png',
   './web/main.dart.js',
   './web/main.dart.js.map',
   './web/manifest.json',
+  './web/pwa.dart',
 ];
 
 /// Last modified timestamp of the files
-final String lastModified = '2020-10-06T17:46:34.000Z';
+final String lastModified = '2020-10-06T18:23:25.000Z';
