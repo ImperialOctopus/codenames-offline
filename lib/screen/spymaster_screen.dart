@@ -11,7 +11,7 @@ class SpymasterScreen extends StatelessWidget {
   static const Color blueColor = Colors.blue;
   static const Color assassinColor = Colors.black;
 
-  static const double gridSpacing = 5;
+  static const double gridSpacing = 0;
   static const double tileCornerRadius = 10;
 
   @override
