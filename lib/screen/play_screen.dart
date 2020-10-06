@@ -1,3 +1,4 @@
+import 'package:codenames/model/card_affiliation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,7 +54,7 @@ class PlayScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(child: _buildBackButton(context)),
-                    Expanded(flex: 3, child: _buildScoreBar(context)),
+                    Expanded(flex: 3, child: _buildScoreBar(context, state)),
                     Expanded(child: _buildCodeButton(context)),
                   ],
                 ),
@@ -167,21 +168,28 @@ class PlayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildScoreBar(BuildContext context) {
+  Widget _buildScoreBar(BuildContext context, GameStatePlaying state) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Spacer(flex: 2),
+        Spacer(flex: 1),
         Expanded(
             child: Card(
           color: cardColor,
-          child: InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: Center(
-              child: Text(
-                'back',
-                style: Theme.of(context).textTheme.headline4,
-              ),
+          child: Center(
+            child: Text(
+              'red: ${state.redCardsLeft}',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ),
+        )),
+        Expanded(
+            child: Card(
+          color: cardColor,
+          child: Center(
+            child: Text(
+              'blue: ${state.blueCardsLeft}',
+              style: Theme.of(context).textTheme.headline4,
             ),
           ),
         )),

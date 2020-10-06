@@ -24,7 +24,7 @@ class NewGameService {
       [StartingTeam startingTeam = StartingTeam.random]) async {
     if (startingTeam == StartingTeam.random) {
       startingTeam =
-          (Random().nextInt(1) == 0) ? StartingTeam.red : StartingTeam.blue;
+          (Random().nextInt(2) == 0) ? StartingTeam.red : StartingTeam.blue;
     }
 
     return wordService
