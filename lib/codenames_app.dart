@@ -1,3 +1,4 @@
+import 'package:codenames/service/secret_code_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,16 +11,26 @@ import 'service/new_game_service.dart';
 import 'theme/theme.dart';
 
 class CodenamesApp extends StatelessWidget {
+  final NewGameService newGameService;
+  final SecretCodeService secretCodeService;
+
   const CodenamesApp({
     @required this.newGameService,
-  }) : assert(newGameService != null);
-
-  final NewGameService newGameService;
+    @required this.secretCodeService,
+  })  : assert(newGameService != null),
+        assert(secretCodeService != null);
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider<NewGameService>.value(
-      value: newGameService,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<NewGameService>.value(
+          value: newGameService,
+        ),
+        RepositoryProvider<SecretCodeService>.value(
+          value: secretCodeService,
+        ),
+      ],
       child: BlocProvider<GameBloc>(
         create: (_) => GameBloc(
           newGameService: newGameService,

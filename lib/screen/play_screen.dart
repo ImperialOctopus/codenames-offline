@@ -1,9 +1,8 @@
-import 'package:codenames/bloc/game/game_event.dart';
-import 'package:codenames/model/card_affiliation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/game/game_bloc.dart';
+import '../bloc/game/game_event.dart';
 import '../bloc/game/game_state.dart';
 import '../model/code_card.dart';
 
