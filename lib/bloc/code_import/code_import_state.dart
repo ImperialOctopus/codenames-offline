@@ -1,21 +1,23 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+
+import '../../model/card_affiliation.dart';
 
 abstract class CodeImportState extends Equatable {
-  final String string;
-  final bool valid;
-
-  const CodeImportState({@required this.string, @required this.valid});
+  const CodeImportState();
 
   @override
-  List<Object> get props => [string, valid];
+  List<Object> get props => [];
 }
 
-class CodeImportStateEmpty extends CodeImportState {
-  const CodeImportStateEmpty() : super(string: '', valid: false);
+class CodeImportStateInvalid extends CodeImportState {
+  const CodeImportStateInvalid();
 }
 
-class CodeImportStateFilled extends CodeImportState {
-  const CodeImportStateFilled({String string, bool valid})
-      : super(string: string, valid: valid);
+class CodeImportStateValid extends CodeImportState {
+  final List<CardAffiliation> list;
+
+  const CodeImportStateValid(this.list);
+
+  @override
+  List<Object> get props => [list];
 }

@@ -13,11 +13,6 @@ class ImportScreen extends StatelessWidget {
         child: Column(
           children: [
             Text('Import Screen'),
-            BlocBuilder<CodeImportBloc, CodeImportState>(
-                bloc: BlocProvider.of<CodeImportBloc>(context),
-                builder: (var context, state) {
-                  return Text(state.valid.toString());
-                }),
             TextField(
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -25,6 +20,22 @@ class ImportScreen extends StatelessWidget {
               onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
                   .add(CodeImportEventChanged(string)),
             ),
+            BlocBuilder<CodeImportBloc, CodeImportState>(
+                bloc: BlocProvider.of<CodeImportBloc>(context),
+                builder: (var context, state) {
+                  if (state is CodeImportStateValid) {
+                    return RaisedButton(
+                      onPressed: () =>
+                          Navigator.of(context).pushNamed('/spymaster'),
+                      child: Text('View Board'),
+                    );
+                  } else {
+                    return RaisedButton(
+                      onPressed: null,
+                      child: Text('Invalid Code'),
+                    );
+                  }
+                }),
           ],
         ),
       ),

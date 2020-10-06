@@ -12,7 +12,7 @@ class CodeImportBloc extends Bloc<CodeImportEvent, CodeImportState> {
 
   CodeImportBloc({@required SecretCodeService secretCodeService})
       : _secretCodeService = secretCodeService,
-        super(CodeImportStateEmpty());
+        super(CodeImportStateInvalid());
 
   @override
   Stream<CodeImportState> mapEventToState(
@@ -26,12 +26,12 @@ class CodeImportBloc extends Bloc<CodeImportEvent, CodeImportState> {
   Stream<CodeImportState> _mapCodeImportEventChangedToState(
     CodeImportEventChanged event,
   ) async* {
-    if (event.string.isEmpty) {
-      yield CodeImportStateEmpty();
+    final list = _secretCodeService.decode(event.string);
+    final valid = _secretCodeService.validateAffiliationList(list);
+    if (valid) {
+      yield CodeImportStateValid(list);
     } else {
-      final list = _secretCodeService.decode(event.string);
-      final valid = _secretCodeService.validateAffiliationList(list);
-      yield CodeImportStateFilled(string: event.string, valid: valid);
+      yield CodeImportStateInvalid();
     }
   }
 
