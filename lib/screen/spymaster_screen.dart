@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../bloc/code_import/code_import_bloc.dart';
 import '../bloc/code_import/code_import_state.dart';
@@ -7,9 +8,12 @@ import '../model/card_affiliation.dart';
 
 class SpymasterScreen extends StatelessWidget {
   static const Color neutralColor = Color.fromARGB(255, 245, 230, 200);
-  static const Color redColor = Colors.red;
-  static const Color blueColor = Colors.blue;
+  static final Color redColor = Colors.red[400];
+  static final Color blueColor = Colors.blue[400];
   static const Color assassinColor = Colors.black;
+
+  static const Color iconColor = Color.fromARGB(100, 0, 0, 0);
+  static const Color iconColorLight = Colors.white;
 
   static const double gridSpacing = 0;
   static const double tileCornerRadius = 10;
