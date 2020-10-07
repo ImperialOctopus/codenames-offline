@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/code_import/code_import_bloc.dart';
 import '../bloc/code_import/code_import_event.dart';
 import '../bloc/code_import/code_import_state.dart';
+import '../extension/uppercase_text_formatter.dart';
 
 class ImportScreen extends StatelessWidget {
   @override
@@ -26,6 +27,11 @@ class ImportScreen extends StatelessWidget {
                     borderSide: BorderSide(),
                   ),
                 ),
+                textAlign: TextAlign.center,
+                inputFormatters: [
+                  UpperCaseTextFormatter(),
+                ],
+                maxLines: null,
                 style: Theme.of(context).textTheme.headline4,
                 onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
                     .add(CodeImportEventChanged(string.toUpperCase().trim())),
