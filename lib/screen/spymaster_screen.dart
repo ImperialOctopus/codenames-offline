@@ -85,13 +85,14 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: state.list
-                .take(5)
+          child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            _markedTileBuilder(context, state.list.first),
+            ...state.list
+                .skip(1)
+                .take(4)
                 .map((aff) => _tileBuilder(context, aff))
                 .toList(),
-          ),
+          ]),
         ),
         Expanded(
           child: Row(
@@ -137,54 +138,62 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
     );
   }
 
-  Widget _tileBuilder(BuildContext context, CardAffiliation aff) {
+  Widget _markedTileBuilder(BuildContext context, CardAffiliation aff) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.all(gridSpacing),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Card(
+              color: Theme.of(context).accentColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(tileCornerRadius)),
+            ),
+            ClipPath(
+              clipper: ShapeBorderClipper(
+                  shape: BeveledRectangleBorder(
+                      borderRadius:
+                          BorderRadius.only(topLeft: Radius.circular(40)))),
+              child: Card(
+                color: _affiliationColor(aff),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(tileCornerRadius)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Color _affiliationColor(CardAffiliation aff) {
     switch (aff) {
       case CardAffiliation.neutral:
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(gridSpacing),
-            child: Card(
-              color: neutralColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(tileCornerRadius)),
-            ),
-          ),
-        );
+        return neutralColor;
       case CardAffiliation.red:
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(gridSpacing),
-            child: Card(
-              color: redColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(tileCornerRadius)),
-            ),
-          ),
-        );
+        return redColor;
       case CardAffiliation.blue:
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(gridSpacing),
-            child: Card(
-              color: blueColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(tileCornerRadius)),
-            ),
-          ),
-        );
+        return blueColor;
       case CardAffiliation.assassin:
-        return Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(gridSpacing),
-            child: Card(
-              color: assassinColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(tileCornerRadius)),
-            ),
-          ),
-        );
+        return assassinColor;
       default:
         throw FallThroughError();
     }
+  }
+
+  Widget _tileBuilder(BuildContext context, CardAffiliation aff) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.all(gridSpacing),
+        child: Card(
+          color: _affiliationColor(aff),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(tileCornerRadius)),
+        ),
+      ),
+    );
   }
 }
