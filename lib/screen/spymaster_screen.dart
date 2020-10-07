@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../bloc/code_import/code_import_bloc.dart';
 import '../bloc/code_import/code_import_state.dart';
@@ -16,6 +15,9 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
   static final Color redColor = Colors.red[400];
   static final Color blueColor = Colors.blue[400];
   static const Color assassinColor = Colors.black;
+
+  static final Color cornerColor = Color.fromARGB(255, 181, 51, 70);
+  static final Color cornerColorAlt = Color.fromARGB(255, 110, 20, 69);
 
   static const Color iconColor = Color.fromARGB(100, 0, 0, 0);
   static const Color iconColorLight = Colors.white;
@@ -150,7 +152,7 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
           fit: StackFit.expand,
           children: [
             Card(
-              color: Theme.of(context).accentColor,
+              color: cornerColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(tileCornerRadius)),
             ),
