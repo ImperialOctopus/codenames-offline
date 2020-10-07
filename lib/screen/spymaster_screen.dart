@@ -10,22 +10,41 @@ class SpymasterScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _SpymasterScreenState();
 }
 
-class _SpymasterScreenState extends State<SpymasterScreen> {
+class _SpymasterScreenState extends State<SpymasterScreen>
+    with SingleTickerProviderStateMixin {
   static const Color neutralColor = Color.fromARGB(255, 245, 230, 200);
   static final Color redColor = Colors.red[400];
   static final Color blueColor = Colors.blue[400];
   static const Color assassinColor = Colors.black;
 
   static final Color cornerColor = Color.fromARGB(255, 181, 51, 70);
-  static final Color cornerColorAlt = Color.fromARGB(255, 110, 20, 69);
-
-  static const Color iconColor = Color.fromARGB(100, 0, 0, 0);
-  static const Color iconColorLight = Colors.white;
 
   static const double gridSpacing = 0;
   static const double tileCornerRadius = 10;
 
+  AnimationController _controller;
+  Animation<double> _animation;
   int rotation = 0;
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _controller.value = 1;
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.fastOutSlowIn,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,17 +87,26 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
             child: Align(
               child: AspectRatio(
                 aspectRatio: 1,
-                child: RotatedBox(
-                  quarterTurns: rotation,
+                child: RotationTransition(
+                  turns:
+                      Tween(begin: (rotation - 1) * 0.25, end: rotation * 0.25)
+                          .animate(_animation),
                   child: _tileSet(context, state),
                 ),
               ),
             ),
           ),
           Flexible(
-            child: OutlinedButton(
-              child: Text('Rotate'),
-              onPressed: () => setState(() => rotation++),
+            child: Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: OutlinedButton(
+                child: Text('Rotate'),
+                onPressed: () => setState(() {
+                  rotation++;
+                  _controller.reset();
+                  _controller.forward();
+                }),
+              ),
             ),
           ),
         ],
