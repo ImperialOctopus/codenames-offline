@@ -52,32 +52,31 @@ class _SpymasterScreenState extends State<SpymasterScreen> {
   }
 
   Widget _buildBoard(BuildContext context, CodeImportStateValid state) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(
-          child: Center(
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: RotatedBox(
-                quarterTurns: rotation,
-                child: _tileSet(context, state),
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Align(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: RotatedBox(
+                  quarterTurns: rotation,
+                  child: _tileSet(context, state),
+                ),
               ),
             ),
           ),
-        ),
-        Center(
-          child: SizedBox(
-            width: 150,
-            height: 60,
+          Flexible(
             child: OutlinedButton(
               child: Text('Rotate'),
               onPressed: () => setState(() => rotation++),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
