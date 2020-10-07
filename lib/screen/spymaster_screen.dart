@@ -5,14 +5,21 @@ import '../bloc/code_import/code_import_bloc.dart';
 import '../bloc/code_import/code_import_state.dart';
 import '../model/card_affiliation.dart';
 
-class SpymasterScreen extends StatelessWidget {
+class SpymasterScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _SpymasterScreenState();
+}
+
+class _SpymasterScreenState extends State<SpymasterScreen> {
   static const Color neutralColor = Color.fromARGB(255, 245, 230, 200);
   static const Color redColor = Colors.red;
   static const Color blueColor = Colors.blue;
   static const Color assassinColor = Colors.black;
 
-  static const double gridSpacing = 5;
+  static const double gridSpacing = 0;
   static const double tileCornerRadius = 10;
+
+  int rotation = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,67 +52,89 @@ class SpymasterScreen extends StatelessWidget {
   }
 
   Widget _buildBoard(BuildContext context, CodeImportStateValid state) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.all(5),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: state.list
-                      .take(5)
-                      .map((aff) => _tileBuilder(context, aff))
-                      .toList(),
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: RotatedBox(
+                quarterTurns: rotation,
+                child: _tileSet(context, state),
               ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: state.list
-                      .skip(5)
-                      .take(5)
-                      .map((aff) => _tileBuilder(context, aff))
-                      .toList(),
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: state.list
-                      .skip(10)
-                      .take(5)
-                      .map((aff) => _tileBuilder(context, aff))
-                      .toList(),
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: state.list
-                      .skip(15)
-                      .take(5)
-                      .map((aff) => _tileBuilder(context, aff))
-                      .toList(),
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: state.list
-                      .skip(20)
-                      .take(5)
-                      .map((aff) => _tileBuilder(context, aff))
-                      .toList(),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        Center(
+          child: SizedBox(
+            width: 150,
+            height: 60,
+            child: OutlinedButton(
+              child: Text('Rotate'),
+              onPressed: () => setState(() => rotation++),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _tileSet(BuildContext context, CodeImportStateValid state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: state.list
+                .take(5)
+                .map((aff) => _tileBuilder(context, aff))
+                .toList(),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: state.list
+                .skip(5)
+                .take(5)
+                .map((aff) => _tileBuilder(context, aff))
+                .toList(),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: state.list
+                .skip(10)
+                .take(5)
+                .map((aff) => _tileBuilder(context, aff))
+                .toList(),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: state.list
+                .skip(15)
+                .take(5)
+                .map((aff) => _tileBuilder(context, aff))
+                .toList(),
+          ),
+        ),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: state.list
+                .skip(20)
+                .take(5)
+                .map((aff) => _tileBuilder(context, aff))
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 
