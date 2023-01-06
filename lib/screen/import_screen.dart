@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
-import '../bloc/code_import/code_import_bloc.dart';
-import '../bloc/code_import/code_import_event.dart';
-import '../bloc/code_import/code_import_state.dart';
-import '../extension/uppercase_text_formatter.dart';
+import '../extensions/uppercase_text_formatter.dart';
+import '../service/secret_code_service.dart';
 
-class ImportScreen extends StatelessWidget {
+class ImportScreen extends StatefulWidget {
+  @override
+  State<ImportScreen> createState() => _ImportScreenState();
+}
+
+class _ImportScreenState extends State<ImportScreen> {
+  late final SecretCodeService secretCodeService;
+
+  String? secretCode;
+
+  @override
+  void initState() {
+    super.initState();
+    secretCodeService = Provider.of<SecretCodeService>(context, listen: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +29,7 @@ class ImportScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('spymaster code',
-                style: Theme.of(context).textTheme.headline3),
+                style: Theme.of(context).textTheme.displaySmall),
             Container(height: 20),
             Container(
               width: 250,
@@ -32,31 +45,39 @@ class ImportScreen extends StatelessWidget {
                   UpperCaseTextFormatter(),
                 ],
                 maxLines: null,
-                style: Theme.of(context).textTheme.headline4,
-                onChanged: (string) => BlocProvider.of<CodeImportBloc>(context)
-                    .add(CodeImportEventChanged(string.toUpperCase().trim())),
+                style: Theme.of(context).textTheme.headlineMedium,
+                onChanged: _onCodeChanged,
               ),
             ),
             Container(height: 20),
-            BlocBuilder<CodeImportBloc, CodeImportState>(
-                bloc: BlocProvider.of<CodeImportBloc>(context),
-                builder: (var context, state) {
-                  if (state is CodeImportStateValid) {
-                    return OutlinedButton(
-                      onPressed: () =>
-                          Navigator.of(context).pushNamed('/spymaster'),
-                      child: Text('view board'),
-                    );
-                  } else {
-                    return OutlinedButton(
-                      onPressed: null,
-                      child: Text('code invalid'),
-                    );
-                  }
-                }),
+            if (secretCode != null)
+              OutlinedButton(
+                onPressed: () => Navigator.of(context).pushNamed('/spymaster'),
+                child: Text('view board'),
+              )
+            else
+              OutlinedButton(
+                onPressed: null,
+                child: Text('code invalid'),
+              ),
           ],
         ),
       ),
     );
+  }
+
+  void _onCodeChanged(String string) {
+    final safeString = string.toUpperCase().trim();
+
+    final list = secretCodeService.decode(safeString);
+    final valid = secretCodeService.validateAffiliationList(list);
+
+    setState(() {
+      if (valid) {
+        secretCode = safeString;
+      } else {
+        secretCode = null;
+      }
+    });
   }
 }

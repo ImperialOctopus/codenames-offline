@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/code_import/code_import_bloc.dart';
-import 'bloc/game/game_bloc.dart';
 import 'screen/export_screen.dart';
 import 'screen/import_screen.dart';
 import 'screen/menu_screen.dart';
-import 'screen/play_screen.dart';
+import 'screen/play_screen/play_screen.dart';
 import 'screen/spymaster_screen.dart';
 import 'service/new_game_service.dart';
 import 'service/secret_code_service.dart';
-import 'theme/theme.dart';
+import 'theme/default_theme.dart';
 
 class CodenamesApp extends StatelessWidget {
   final NewGameService newGameService;
   final SecretCodeService secretCodeService;
 
-  const CodenamesApp({
-    @required this.newGameService,
-    @required this.secretCodeService,
-  })  : assert(newGameService != null),
-        assert(secretCodeService != null);
+  const CodenamesApp();
 
   @override
   Widget build(BuildContext context) {

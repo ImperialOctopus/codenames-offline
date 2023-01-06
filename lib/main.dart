@@ -5,14 +5,5 @@ import 'service/secret_code_service.dart';
 import 'service/word_service.dart';
 
 void main() async {
-  //pwa.Client();
-
-  final wordService = WordService();
-  final newGameService = NewGameService(wordService);
-  final secretCodeService = SecretCodeService();
-
-  runApp(CodenamesApp(
-    newGameService: newGameService,
-    secretCodeService: secretCodeService,
-  ));
+  runApp(const CodenamesApp());
 }

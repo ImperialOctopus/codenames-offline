@@ -1,6 +1,6 @@
 import 'package:baseconvert/baseconvert.dart' as baseconvert;
 
-import '../model/card_affiliation.dart';
+import '../models/card_affiliation.dart';
 import 'new_game_service.dart';
 
 class SecretCodeService {
