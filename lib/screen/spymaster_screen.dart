@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/code_import/code_import_bloc.dart';
 import '../bloc/code_import/code_import_state.dart';
-import '../model/card_affiliation.dart';
+import '../models/card_affiliation.dart';
 
 class SpymasterScreen extends StatefulWidget {
   @override

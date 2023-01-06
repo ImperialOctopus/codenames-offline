@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import '../model/card_affiliation.dart';
-import '../model/code_card.dart';
+import '../models/card_affiliation.dart';
+import '../models/code_card.dart';
 import 'word_service.dart';
 
 enum StartingTeam {
@@ -71,6 +71,6 @@ class NewGameService {
         })
         .values
         .toList()
-          ..shuffle();
+      ..shuffle();
   }
 }
