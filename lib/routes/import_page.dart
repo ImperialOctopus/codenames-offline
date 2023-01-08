@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import '../extensions/uppercase_text_formatter.dart';
 import '../service/secret_code_service.dart';
 
-class ImportScreen extends StatefulWidget {
+class ImportPage extends StatefulWidget {
   @override
-  State<ImportScreen> createState() => _ImportScreenState();
+  State<ImportPage> createState() => _ImportPageState();
 }
 
-class _ImportScreenState extends State<ImportScreen> {
+class _ImportPageState extends State<ImportPage> {
   late final SecretCodeService secretCodeService;
 
   String? secretCode;
