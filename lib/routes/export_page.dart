@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/board_state.dart';
-import '../service/secret_code_service.dart';
+import '../services/secret_code_service.dart';
 
 class ExportPage extends StatelessWidget {
   final BoardState? boardState;
