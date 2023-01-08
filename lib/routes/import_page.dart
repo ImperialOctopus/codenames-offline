@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../extensions/uppercase_text_formatter.dart';
-import '../service/secret_code_service.dart';
+import '../services/secret_code_service.dart';
 
 class ImportPage extends StatefulWidget {
   @override

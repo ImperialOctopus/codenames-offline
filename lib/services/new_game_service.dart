@@ -18,7 +18,7 @@ class NewGameService {
 
   final WordService wordService;
 
-  NewGameService(this.wordService);
+  NewGameService({required this.wordService});
 
   Future<List<CodeCard>> generateCardList(
       [StartingTeam startingTeam = StartingTeam.random]) async {
