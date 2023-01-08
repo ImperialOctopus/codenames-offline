@@ -2,7 +2,7 @@ import 'package:codenames/controllers/game_state_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import '../models/board_state.dart';
 import '../service/secret_code_service.dart';
 
-class ExportScreen extends StatelessWidget {
+class ExportPage extends StatelessWidget {
   final BoardState? boardState;
 
-  const ExportScreen({required this.boardState});
+  const ExportPage({required this.boardState});
 
   @override
   Widget build(BuildContext context) {

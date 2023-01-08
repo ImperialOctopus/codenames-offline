@@ -1,5 +1,5 @@
 import 'package:codenames/controllers/game_state_controller.dart';
-import 'package:codenames/screen/play_screen/card_board.dart';
+import 'package:codenames/routes/play_screen/card_board.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../models/card_affiliation.dart';
 import '../../models/code_card.dart';
 
-class PlayScreen extends StatelessWidget {
+class PlayPage extends StatelessWidget {
   static const Color cardColor = Color.fromARGB(255, 245, 230, 200);
   static const Color neutralColor = cardColor;
   static final Color redColor = Colors.red.shade400;
@@ -18,6 +18,8 @@ class PlayScreen extends StatelessWidget {
   static const Color iconColorLight = Colors.white;
 
   static const Color backButtonColor = Color.fromARGB(255, 181, 51, 70);
+
+  const PlayPage({super.key});
 
   @override
   Widget build(BuildContext context) {

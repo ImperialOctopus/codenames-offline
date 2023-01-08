@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/code_import/code_import_bloc.dart';
-import '../bloc/code_import/code_import_state.dart';
 import '../models/card_affiliation.dart';
 
-class SpymasterScreen extends StatefulWidget {
+class SpymasterPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SpymasterScreenState();
+  State<StatefulWidget> createState() => _SpymasterPageState();
 }
 
-class _SpymasterScreenState extends State<SpymasterScreen>
+class _SpymasterPageState extends State<SpymasterPage>
     with SingleTickerProviderStateMixin {
   static const Color neutralColor = Color.fromARGB(255, 245, 230, 200);
   static final Color redColor = Colors.red[400];
