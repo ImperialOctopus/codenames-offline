@@ -9,13 +9,6 @@ class SpymasterPage extends StatefulWidget {
 
 class _SpymasterPageState extends State<SpymasterPage>
     with SingleTickerProviderStateMixin {
-  static const Color neutralColor = Color.fromARGB(255, 245, 230, 200);
-  static final Color redColor = Colors.red[400];
-  static final Color blueColor = Colors.blue[400];
-  static const Color assassinColor = Colors.black;
-
-  static final Color cornerColor = Color.fromARGB(255, 181, 51, 70);
-
   static const double gridSpacing = 0;
   static const double tileCornerRadius = 10;
 
