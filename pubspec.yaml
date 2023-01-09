@@ -25,6 +25,7 @@ dependencies:
   auto_route: ^5.0.4
   provider: ^6.0.5
   font_awesome_flutter: ^10.3.0
+  any_base: ^2.0.0
   flutter:
     sdk: flutter
 

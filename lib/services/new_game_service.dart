@@ -20,8 +20,8 @@ class NewGameService {
 
   NewGameService({required this.wordService});
 
-  Future<List<CodeCard>> generateCardList(
-      [StartingTeam startingTeam = StartingTeam.random]) async {
+  List<CodeCard> generateCardList(
+      [StartingTeam startingTeam = StartingTeam.random]) {
     if (startingTeam == StartingTeam.random) {
       startingTeam =
           (Random().nextInt(2) == 0) ? StartingTeam.red : StartingTeam.blue;

@@ -20,6 +20,7 @@ final defaultTheme = AppTheme(
     useMaterial3: true,
   ),
   cardColor: const Color.fromARGB(255, 245, 230, 200),
+  alignmentNotchColor: const Color.fromARGB(255, 189, 175, 147),
   neutralColor: const Color.fromARGB(255, 245, 230, 200),
   redColor: Colors.red.shade400,
   blueColor: Colors.blue.shade400,
