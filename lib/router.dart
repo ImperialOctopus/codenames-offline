@@ -2,11 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'models/board_state.dart';
+import 'models/card_affiliation.dart';
 import 'routes/export_page.dart';
 import 'routes/import_page.dart';
 import 'routes/menu_page.dart';
-import 'routes/play_screen/play_page.dart';
-import 'routes/spymaster_page.dart';
+import 'routes/play/play_page.dart';
+import 'routes/spymaster/spymaster_page.dart';
 
 part 'router.gr.dart';
 

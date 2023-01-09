@@ -1,3 +1,6 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:codenames/models/card_affiliation.dart';
+import 'package:codenames/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -5,14 +8,15 @@ import '../extensions/uppercase_text_formatter.dart';
 import '../services/secret_code_service.dart';
 
 class ImportPage extends StatefulWidget {
+  const ImportPage({super.key});
+
   @override
   State<ImportPage> createState() => _ImportPageState();
 }
 
 class _ImportPageState extends State<ImportPage> {
   late final SecretCodeService secretCodeService;
-
-  String? secretCode;
+  List<CardAffiliation>? spymasterData;
 
   @override
   void initState() {
@@ -31,13 +35,13 @@ class _ImportPageState extends State<ImportPage> {
             Text('spymaster code',
                 style: Theme.of(context).textTheme.displaySmall),
             Container(height: 20),
-            Container(
+            SizedBox(
               width: 250,
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(),
+                    borderSide: const BorderSide(),
                   ),
                 ),
                 textAlign: TextAlign.center,
@@ -50,13 +54,14 @@ class _ImportPageState extends State<ImportPage> {
               ),
             ),
             Container(height: 20),
-            if (secretCode != null)
+            if (spymasterData != null)
               OutlinedButton(
-                onPressed: () => Navigator.of(context).pushNamed('/spymaster'),
-                child: Text('view board'),
+                onPressed: () => context.router
+                    .push(SpymasterRoute(spymasterData: spymasterData!)),
+                child: const Text('view board'),
               )
             else
-              OutlinedButton(
+              const OutlinedButton(
                 onPressed: null,
                 child: Text('code invalid'),
               ),
@@ -74,9 +79,9 @@ class _ImportPageState extends State<ImportPage> {
 
     setState(() {
       if (valid) {
-        secretCode = safeString;
+        spymasterData = list;
       } else {
-        secretCode = null;
+        spymasterData = null;
       }
     });
   }

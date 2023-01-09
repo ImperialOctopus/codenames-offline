@@ -1,29 +1,28 @@
-import 'package:baseconvert/baseconvert.dart' as baseconvert;
+import 'package:any_base/any_base.dart';
 
 import '../models/card_affiliation.dart';
 import 'new_game_service.dart';
 
 class SecretCodeService {
+  static const codeSet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  static const cardSet = '0123';
+  static const converter = AnyBase(cardSet, codeSet);
+
   String encode(List<CardAffiliation> list) {
     final string = list.map((aff) => aff.index).join();
-    return baseconvert
-        .base(string, inBase: 4, outBase: 36, string: true)
-        .toString();
+    return converter.convert(string);
   }
 
   List<CardAffiliation> decode(String string) {
     try {
-      final fourString =
-          (baseconvert.base(string, inBase: 36, outBase: 4) as List<dynamic>)
-              .map((dynamic e) => e.toString())
-              .toList();
-      final b = fourString.map((i) => int.parse(i.toString())).toList();
-      final result = b.map((val) => CardAffiliation.values[val]).toList();
+      final cardList = converter.revert(string).split('').map(int.parse);
+      final result =
+          cardList.map((val) => CardAffiliation.values[val]).toList();
       while (result.length < 25) {
         result.insert(0, CardAffiliation.neutral);
       }
       return result;
-    } on Exception {
+    } catch (e) {
       return [];
     }
   }

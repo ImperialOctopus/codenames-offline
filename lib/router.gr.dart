@@ -20,7 +20,7 @@ class _$AppRouter extends RootStackRouter {
     MenuRoute.name: (routeData) {
       return MaterialPageX<void>(
         routeData: routeData,
-        child: MenuPage(),
+        child: const MenuPage(),
       );
     },
     PlayRoute.name: (routeData) {
@@ -33,19 +33,26 @@ class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<ExportRouteArgs>();
       return MaterialPageX<void>(
         routeData: routeData,
-        child: ExportPage(boardState: args.boardState),
+        child: ExportPage(
+          key: args.key,
+          boardState: args.boardState,
+        ),
       );
     },
     ImportRoute.name: (routeData) {
       return MaterialPageX<void>(
         routeData: routeData,
-        child: ImportPage(),
+        child: const ImportPage(),
       );
     },
     SpymasterRoute.name: (routeData) {
+      final args = routeData.argsAs<SpymasterRouteArgs>();
       return MaterialPageX<void>(
         routeData: routeData,
-        child: SpymasterPage(),
+        child: SpymasterPage(
+          key: args.key,
+          spymasterData: args.spymasterData,
+        ),
       );
     },
   };
@@ -102,24 +109,34 @@ class PlayRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ExportPage]
 class ExportRoute extends PageRouteInfo<ExportRouteArgs> {
-  ExportRoute({required BoardState? boardState})
-      : super(
+  ExportRoute({
+    Key? key,
+    required BoardState boardState,
+  }) : super(
           ExportRoute.name,
           path: '/export',
-          args: ExportRouteArgs(boardState: boardState),
+          args: ExportRouteArgs(
+            key: key,
+            boardState: boardState,
+          ),
         );
 
   static const String name = 'ExportRoute';
 }
 
 class ExportRouteArgs {
-  const ExportRouteArgs({required this.boardState});
+  const ExportRouteArgs({
+    this.key,
+    required this.boardState,
+  });
 
-  final BoardState? boardState;
+  final Key? key;
+
+  final BoardState boardState;
 
   @override
   String toString() {
-    return 'ExportRouteArgs{boardState: $boardState}';
+    return 'ExportRouteArgs{key: $key, boardState: $boardState}';
   }
 }
 
@@ -137,12 +154,34 @@ class ImportRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SpymasterPage]
-class SpymasterRoute extends PageRouteInfo<void> {
-  const SpymasterRoute()
-      : super(
+class SpymasterRoute extends PageRouteInfo<SpymasterRouteArgs> {
+  SpymasterRoute({
+    Key? key,
+    required List<CardAffiliation> spymasterData,
+  }) : super(
           SpymasterRoute.name,
           path: '/spymaster',
+          args: SpymasterRouteArgs(
+            key: key,
+            spymasterData: spymasterData,
+          ),
         );
 
   static const String name = 'SpymasterRoute';
+}
+
+class SpymasterRouteArgs {
+  const SpymasterRouteArgs({
+    this.key,
+    required this.spymasterData,
+  });
+
+  final Key? key;
+
+  final List<CardAffiliation> spymasterData;
+
+  @override
+  String toString() {
+    return 'SpymasterRouteArgs{key: $key, spymasterData: $spymasterData}';
+  }
 }

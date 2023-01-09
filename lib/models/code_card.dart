@@ -1,12 +1,12 @@
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import 'card_affiliation.dart';
 
 @immutable
 class CodeCard {
   final CardAffiliation affiliation;
-  final bool visible;
   final String word;
+  final bool visible;
 
   const CodeCard({
     required this.word,
@@ -16,11 +16,12 @@ class CodeCard {
 
   CodeCard copyWith({
     CardAffiliation? affiliation,
-    bool? visible,
     String? word,
+    bool? visible,
   }) =>
       CodeCard(
-          affiliation: affiliation ?? this.affiliation,
-          visible: visible ?? this.visible,
-          word: word ?? this.word);
+        affiliation: affiliation ?? this.affiliation,
+        word: word ?? this.word,
+        visible: visible ?? this.visible,
+      );
 }

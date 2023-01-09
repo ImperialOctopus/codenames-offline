@@ -1,8 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:codenames/controllers/game_state_controller.dart';
+import 'package:codenames/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
+  const MenuPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,32 +22,33 @@ class MenuPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: Consumer<GameStateController>(
                 builder: (context, gameStateController, _) => OutlinedButton(
                   onPressed: gameStateController.value == null
                       ? null
-                      : () => Navigator.of(context).pushNamed('/play'),
+                      : () => context.router.push(const PlayRoute()),
                   child: const Text('continue'),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: OutlinedButton(
-                  child: Text('new game'),
+                  child: const Text('new game'),
                   onPressed: () {
-                    Provider.of<GameStateController>(context).newGame();
-                    Navigator.of(context).pushNamed('/play');
+                    Provider.of<GameStateController>(context, listen: false)
+                        .newGame();
+                    context.router.push(const PlayRoute());
                   }),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 5),
+              padding: const EdgeInsets.symmetric(vertical: 5),
               child: OutlinedButton(
-                  child: Text(
+                  child: const Text(
                     'spymaster',
                   ),
-                  onPressed: () => Navigator.of(context).pushNamed('/import')),
+                  onPressed: () => context.router.push(const ImportRoute())),
             ),
           ],
         ),
